@@ -1,8 +1,12 @@
+import json
+
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
+from rest_framework.views import APIView
+from django.core import serializers as s
 
 from user import models
 from . import serializers
@@ -14,9 +18,26 @@ class ListUser(generics.ListCreateAPIView):
     serializer_class = serializers.AccountSerializer
 
 
-class DetailUser(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Account.objects.all()
-    serializer_class = serializers.AccountSerializer
+class DetailUser(APIView):
+    def post(self, request):
+        # Data post
+        nama = request.data['nama']
+
+        # Get all object absen and take name with Data post
+        json_absen = json.loads(s.serialize('json', models.Absen.objects.all()))
+        array_absen = []
+        for i in json_absen:
+            if i['fields']['name'] == nama:
+                array_absen.append(i['fields'])
+
+        # Get object with name
+        json_qs = json.loads(s.serialize('json', models.Account.objects.filter(name=nama)))[0]['fields']
+        json_qs['absen'] = array_absen
+        result = {
+            "result": json_qs,
+        }
+
+        return Response(result)
 
 @api_view(['POST',])
 @permission_classes((AllowAny, ))

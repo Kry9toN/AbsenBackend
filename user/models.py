@@ -48,7 +48,6 @@ class Account(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     longitude = models.IntegerField(default=0)
     latitude = models.IntegerField(default=0)
-    absen = ArrayField(models.CharField(max_length=200), default=list)
 
     objects = AccountManager()
     
