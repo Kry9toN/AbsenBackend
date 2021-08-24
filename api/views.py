@@ -54,7 +54,6 @@ def registration_view(request):
         return Response(data)
 
 @api_view(['POST',])
-@permission_classes((AllowAny, ))
 def absen_view(request):
     if request.method == 'POST':
         serializer = serializers.AbsenSerializer(data=request.data)
