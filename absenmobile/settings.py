@@ -94,12 +94,8 @@ WSGI_APPLICATION = 'absenmobile.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'AbsenMobile',
-        'USER': 'postgres',
-        'PASSWORD': '468213790',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
