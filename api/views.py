@@ -1,12 +1,13 @@
 import json
 
+from django.core import serializers as s
+
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
-from django.core import serializers as s
 
 from user import models
 from . import serializers
