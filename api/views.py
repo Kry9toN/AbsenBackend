@@ -22,21 +22,19 @@ class ListUser(generics.ListCreateAPIView):
 class DetailUser(APIView):
     def post(self, request):
         # Data post
-        nama = request.data['nama']
+        uname = request.data['username']
 
         # Get all object absen and take name with Data post
         json_absen = json.loads(s.serialize('json', models.Absen.objects.all()))
         array_absen = []
         for i in json_absen:
-            if i['fields']['name'] == nama:
+            if i['fields']['name'] == uname:
                 array_absen.append(i['fields'])
 
         # Get object with name
-        json_qs = json.loads(s.serialize('json', models.Account.objects.filter(name=nama)))[0]['fields']
+        json_qs = json.loads(s.serialize('json', models.Account.objects.filter(username=uname)))[0]['fields']
         json_qs['absen'] = array_absen
-        result = {
-            "result": json_qs,
-        }
+        result = json_qs
 
         return Response(result)
 
