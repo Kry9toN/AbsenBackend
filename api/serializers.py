@@ -11,8 +11,8 @@ class AccountSerializer(serializers.ModelSerializer):
             'is_guru',
             'is_dudi',
             'is_superuser',
-            'longitude',
-            'latitude'
+            'latitude',
+            'longitude'
         )
         model = models.Account
 
