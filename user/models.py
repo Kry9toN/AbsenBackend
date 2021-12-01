@@ -45,8 +45,8 @@ class Account(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    longitude = models.IntegerField(default=0)
-    latitude = models.IntegerField(default=0)
+    longitude = models.CharField(default=0)
+    latitude = models.CharField(default=0)
 
     objects = AccountManager()
     
@@ -68,8 +68,8 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 
 class Absen(models.Model):
     name = models.CharField(max_length=200)
-    longitude = models.IntegerField(default=0)
-    latitude = models.IntegerField(default=0)
+    longitude = models.CharField(default=0)
+    latitude = models.CharField(default=0)
 
     def __str__(self):
         self.name
